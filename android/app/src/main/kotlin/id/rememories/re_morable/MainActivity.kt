@@ -1,4 +1,4 @@
-package com.example.re_morable
+package id.rememories.re_morable
 
 import io.flutter.embedding.android.FlutterActivity
 
