@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "684501001780",
+    "project_id": "re-memories",
+    "storage_bucket": "re-memories.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684501001780:android:c91f2f75b16a2e63da0c61",
+        "android_client_info": {
+          "package_name": "id.rememories.re_morable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684501001780-mm5v8c7ppm1077qvt4koipj6n7i63b6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.rememories.re_morable",
+            "certificate_hash": "6a4dea13c84c50567bc4efccdf7bf088e17cff08"
+          }
+        },
+        {
+          "client_id": "684501001780-5ekifhoekjdb0eq7ii7llp2qnbah0tl0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXBgVEVuiVXbFEdLg5pOZntTGD9SuR92E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684501001780-5ekifhoekjdb0eq7ii7llp2qnbah0tl0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
