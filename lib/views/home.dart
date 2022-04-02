@@ -1,26 +1,55 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:re_morable/components/slideshow_home.dart';
 import 'package:re_morable/components/member_list.dart';
 import 'package:re_morable/components/list_video.dart';
-import 'package:http/http.dart' as http;
+import 'package:re_morable/modules/slideshow_loading.dart';
+import 'package:re_morable/modules/home_model.dart';
+import 'package:re_morable/modules/fetch.dart';
+import 'package:re_morable/modules/save_local.dart';
 
-// ignore: must_be_immutable
 class Home extends StatefulWidget {
-  // init data object
-  // ignore: prefer_typing_uninitialized_variables
-  var data;
-  bool isError;
-
-  Home({Key? key, this.data, required this.isError}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  // init RefreshIndicator when open app
+  @override
+  initState() {
+    super.initState();
+
+    if (SaveLocal.data == null) {
+      getDataHome();
+    }
+  }
+
+  Future<void> getDataHome() async {
+    final _result = await RemoteService.getData(
+        "http://rem-play-server.yansaan.repl.co/on-app");
+
+    if (_result == null) {
+      setState(() {
+        SaveLocal.isError = true;
+      });
+      // add message
+      final snackBar = SnackBar(
+        content: const Text("Check your internet connection lol"),
+        action: SnackBarAction(
+          label: "OK",
+          // ignore: avoid_returning_null_for_void
+          onPressed: () => null,
+        ),
+      );
+
+      // show snackbar
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      setState(() {
+        SaveLocal.data = HomeModel.fromJson(_result);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +60,10 @@ class _HomeState extends State<Home> {
           addAutomaticKeepAlives: true,
           children: <Widget>[
             // when isError is true, hide slideshow
-            widget.isError
-                ? Container()
-                : Slideshow(tabSlideshow: widget.data!['tab']),
+            SafeArea(
+                child: (SaveLocal.data == null)
+                    ? const SlideshowLoading()
+                    : SlideshowHome(tabSlideshow: SaveLocal.data!.slideshow)),
             // make header text
             Container(
               margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
@@ -42,7 +72,7 @@ class _HomeState extends State<Home> {
                 "Members",
                 style: TextStyle(
                   fontSize: 25,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
@@ -53,42 +83,47 @@ class _HomeState extends State<Home> {
             Container(
               margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
               alignment: Alignment.topLeft,
-              child: (widget.isError)
+              child: (SaveLocal.isError)
                   ? Container()
                   : const Text(
                       "Latest Videos",
                       style: TextStyle(
                         fontSize: 25,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                         color: Colors.black,
                       ),
                     ),
             ),
-            (widget.isError)
-                ? Container()
-                : ListVideo(list: widget.data!['list']),
+            //(isError) ? Container() : ListVideo(list: data!['list']),
           ],
         ),
         onRefresh: () async {
           //sleep 5000
-          const apiUrl = 'http://rem-play-server.yansaan.repl.co/on-app';
+          final _result = await RemoteService.getData(
+              "http://rem-play-server.yansaan.repl.co/on-app");
 
-          try {
-            final response = await http.get(Uri.parse(apiUrl));
+          if (_result == null) {
+            setState(() {
+              SaveLocal.isError = true;
+            });
+            // add message
+            final snackBar = SnackBar(
+              content: const Text("Check your internet connection lol"),
+              action: SnackBarAction(
+                label: "OK",
+                // ignore: avoid_returning_null_for_void
+                onPressed: () => null,
+              ),
+            );
 
+            // show snackbar
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          } else {
             setState(() {
-              widget.data = json.decode(response.body);
-              widget.isError = false;
+              SaveLocal.data = HomeModel.fromJson(_result);
+              SaveLocal.isError = false;
             });
-            print(widget.data);
-          } catch (e) {
-            setState(() {
-              widget.isError = true;
-            });
-            print(e);
           }
-
-          print(widget.isError);
         });
   }
 }

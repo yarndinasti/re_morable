@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 void launchURL(String s) async {
   if (!await launch(s)) {
     // Show snackbar error no connection
-    SnackBar(
+    final snackbar = SnackBar(
       content: const Text("Link broken"),
       action: SnackBarAction(
         label: "OK",
@@ -14,5 +14,3 @@ void launchURL(String s) async {
     );
   }
 }
-
-// 

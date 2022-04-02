@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^1.13.1
   flutter_local_notifications: ^6.0.0
   firebase_messaging: ^11.2.11
+  shimmer: ^2.0.0
   shared_preferences: ^2.0.13
 
 dev_dependencies:
@@ -169,8 +170,12 @@ flutter:
   assets:
     - assets/logo-dark.png
     - assets/logo-light.png
-    - assets/oj.jpg
-    - assets/iofi.jpg
+    # Members Area
+    - assets/members/evelyn/icon-preview.png
+    - assets/members/lily/icon-preview.png
+    - assets/members/reynard/icon-preview.png
+    - assets/members/chloe/icon-preview.png
+    - assets/members/iofi/icon-preview.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

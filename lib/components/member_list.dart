@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-class MemberList extends StatelessWidget {
+class MemberList extends StatefulWidget {
   const MemberList({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // make item image top and text bottom and clickable
+  State<MemberList> createState() => _MemberListState();
+}
+
+class _MemberListState extends State<MemberList> {
+  List<Widget> list_member = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    final member = [
+      {'name': "Evelyn Vtuber", 'slug': 'evelyn'},
+      {'name': "Lily Ifeta", 'slug': 'lily'},
+      {'name': "Reynard Blanc", 'slug': 'reynard'},
+      {'name': "Chloe Pawapua", 'slug': 'chloe'},
+    ];
+
+    print(member);
+
+    for (var i = 0; i < member.length; i++) {
+      list_member.add(
         Container(
-          margin: const EdgeInsets.only(left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 10, right: 10),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed("iofi");
+              Navigator.of(context).pushNamed(member[i]['slug'].toString());
             },
             child: Column(
               children: [
@@ -22,10 +38,18 @@ class MemberList extends StatelessWidget {
                 Container(
                   width: 80,
                   height: 80,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 2,
+                        spreadRadius: 1,
+                      )
+                    ],
                     image: DecorationImage(
-                      image: AssetImage('assets/iofi.jpg'),
+                      image: AssetImage(
+                          "assets/members/${member[i]['slug']}/icon-preview.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -33,9 +57,9 @@ class MemberList extends StatelessWidget {
                 // make text
                 Container(
                   margin: const EdgeInsets.only(top: 10),
-                  child: const Text(
-                    "Iofi",
-                    style: TextStyle(
+                  child: Text(
+                    member[i]['name'].toString(),
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
@@ -46,7 +70,23 @@ class MemberList extends StatelessWidget {
             ),
           ),
         ),
-      ],
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // make container position in center
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      height: 104,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        shrinkWrap: true,
+        children: list_member,
+      ),
     );
   }
 }

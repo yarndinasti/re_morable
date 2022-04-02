@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:re_morable/modules/loading_page.dart';
 import 'views/home.dart';
-import 'package:http/http.dart' as http;
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -15,7 +11,7 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   int _currentIndex = 0;
   List<Widget> homeView = [
-    const LoadingPage(),
+    const Home(),
     const Center(
       child: Text("Halaman ini masih dalam pengerjaan"),
     ),
@@ -30,33 +26,6 @@ class _IndexState extends State<Index> {
     const Text('More'),
   ];
 
-  Future<void> _fetchData() async {
-    super.initState();
-    // get data from api
-    try {
-      const apiUrl = 'http://rem-play-server.yansaan.repl.co/on-app';
-
-      final response = await http.get(Uri.parse(apiUrl));
-      final data = json.decode(response.body);
-
-      setState(() {
-        homeView[0] = Home(data: data, isError: false);
-      });
-    } catch (e) {
-      // when error
-      setState(() {
-        print(e);
-        homeView[0] = Home(isError: true);
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,24 +39,37 @@ class _IndexState extends State<Index> {
           foregroundColor: Colors.black,
         ),
         body: homeView[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper),
-              label: 'News',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'More',
-            ),
-          ],
-          currentIndex: _currentIndex,
-          selectedItemColor: const Color.fromARGB(255, 43, 43, 43),
-          onTap: (int index) => setState(() => _currentIndex = index),
+        bottomNavigationBar: NavigationBarTheme(
+          data: NavigationBarThemeData(
+              indicatorColor: const Color.fromARGB(255, 192, 192, 192),
+              labelTextStyle: MaterialStateProperty.all(
+                  const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
+          child: NavigationBar(
+              backgroundColor: const Color.fromARGB(255, 238, 238, 238),
+              height: 60,
+              selectedIndex: _currentIndex,
+              destinations: const [
+                NavigationDestination(
+                  icon: Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.newspaper_outlined),
+                  selectedIcon: Icon(Icons.newspaper),
+                  label: 'News',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.info_outline_rounded),
+                  selectedIcon: Icon(Icons.info_rounded),
+                  label: 'More',
+                ),
+              ],
+              onDestinationSelected: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              }),
         ));
   }
 }
