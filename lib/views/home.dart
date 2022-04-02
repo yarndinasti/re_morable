@@ -1,128 +1,94 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:re_morable/components/slideshow_home.dart';
-import 'info_member.dart';
+import 'package:re_morable/components/member_list.dart';
+import 'package:re_morable/components/list_video.dart';
+import 'package:http/http.dart' as http;
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class Home extends StatefulWidget {
+  // init data object
+  // ignore: prefer_typing_uninitialized_variables
+  var data;
+  bool isError;
+
+  Home({Key? key, this.data, required this.isError}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  // init RefreshIndicator when open app
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        // create appBar without shadow and transparent background
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Image.asset('assets/logo-dark.png'),
-        ),
-        body: RefreshIndicator(
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              addAutomaticKeepAlives: true,
-              children: <Widget>[
-                // add image slideshow
-                const Slideshow(),
-                // make header text
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Members",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
+    return RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.onEdge,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          addAutomaticKeepAlives: true,
+          children: <Widget>[
+            // when isError is true, hide slideshow
+            widget.isError
+                ? Container()
+                : Slideshow(tabSlideshow: widget.data!['tab']),
+            // make header text
+            Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+              alignment: Alignment.topLeft,
+              child: const Text(
+                "Members",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
                 ),
-                // create list item flex row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // make item image top and text bottom and clickable
-                    Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const InfoVtuber(
-                                        slug: "iofi",
-                                      )));
-                        },
-                        child: Column(
-                          children: [
-                            // make image rounded
-                            Container(
-                              width: 100,
-                              height: 100,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/iofi.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            // make text
-                            Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: const Text(
-                                "Iofi",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+              ),
+            ),
+            // create list item flex row
+            const MemberList(),
+            // make header text
+            Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+              alignment: Alignment.topLeft,
+              child: (widget.isError)
+                  ? Container()
+                  : const Text(
+                      "Latest Videos",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
                       ),
                     ),
-                  ],
-                ),
-                // make header text
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    "Latest Videos",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
             ),
-            onRefresh: () async {
-              print("Refreshed");
-            }),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper),
-              label: 'News',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.info),
-              label: 'More',
-            ),
+            (widget.isError)
+                ? Container()
+                : ListVideo(list: widget.data!['list']),
           ],
-          currentIndex: 0,
-          selectedItemColor: const Color.fromARGB(255, 43, 43, 43),
-          onTap: (int index) {
-            print(index);
-          },
-        ));
+        ),
+        onRefresh: () async {
+          //sleep 5000
+          const apiUrl = 'http://rem-play-server.yansaan.repl.co/on-app';
+
+          try {
+            final response = await http.get(Uri.parse(apiUrl));
+
+            setState(() {
+              widget.data = json.decode(response.body);
+              widget.isError = false;
+            });
+            print(widget.data);
+          } catch (e) {
+            setState(() {
+              widget.isError = true;
+            });
+            print(e);
+          }
+
+          print(widget.isError);
+        });
   }
 }

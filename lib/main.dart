@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'views/home.dart';
+import 'index.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'modules/anchor.dart';
+
+// Routes
+import 'views/info_member.dart';
+// End Routes
 
 Future<void> _handleBGFire(RemoteMessage message) async {
   print('Handling background message');
@@ -32,6 +36,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    FirebaseMessaging.instance.getToken().then((token) {
+      print("Firebase token: $token");
+    });
+
     FirebaseMessaging.instance.getInitialMessage().then((msg) {
       if (msg != null) {
         String? message = msg.notification!.title;
@@ -45,13 +53,11 @@ class _MyAppState extends State<MyApp> {
 
     // Notifications
     FirebaseMessaging.onMessageOpenedApp.listen((e) {
-      if (e != null) {
-        String? message = e.notification!.title;
-        print('Message opened: $message');
+      String? message = e.notification!.title;
+      print('Message opened: $message');
 
-        if (e.data['url'] != null) {
-          launchURL(e.data['url']);
-        }
+      if (e.data['url'] != null) {
+        launchURL(e.data['url']);
       }
     });
 
@@ -64,8 +70,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Home(),
+    return MaterialApp(
+      home: const Index(),
+      routes: {
+        'iofi': (_) => const InfoVtuber(slug: 'iofi'),
+      },
     );
   }
 }
@@ -91,5 +100,3 @@ Future<void> reqMsgPermission() async {
     print('User declined or has not accepted permission');
   }
 }
-
-// make notification using firebase messaging

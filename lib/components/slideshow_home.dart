@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:re_morable/modules/anchor.dart';
 
-class Slideshow extends StatelessWidget {
-  const Slideshow({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class Slideshow extends StatefulWidget {
+  // List<dynamic>
+  final List<dynamic> tabSlideshow;
+  const Slideshow({Key? key, required this.tabSlideshow}) : super(key: key);
 
+  @override
+  State<Slideshow> createState() => _SlideshowState();
+}
+
+class _SlideshowState extends State<Slideshow> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,11 +26,7 @@ class Slideshow extends StatelessWidget {
           viewportFraction: 1,
           initialPage: 0,
         ),
-        items: [
-          'assets/oj.jpg',
-          'assets/oj.jpg',
-          'assets/oj.jpg',
-        ].map((i) {
+        items: widget.tabSlideshow.map((i) {
           return Builder(
             builder: (BuildContext context) {
               // Add text inside image
@@ -31,24 +35,25 @@ class Slideshow extends StatelessWidget {
                 decoration: BoxDecoration(
                   // add image + transparent black in foreground
                   image: DecorationImage(
-                    image: AssetImage(i),
+                    // get image online
+                    image: NetworkImage(i['thumbnail']),
                     fit: BoxFit.cover,
                   ),
                 ),
                 // add text in bottom of image
                 child: GestureDetector(
-                  onTap: () =>
-                      launchURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ"),
+                  onTap: () => launchURL(i['url']),
                   child: Container(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withOpacity(0.3),
                     padding: const EdgeInsets.all(16),
-                    child: const Align(
+                    child: Align(
+                      // get i.title in Text()
                       child: Text(
-                        'OJ',
-                        style: TextStyle(
+                        i['title'],
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 36,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       alignment: Alignment.bottomLeft,
