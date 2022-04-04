@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class MemberList extends StatefulWidget {
   const MemberList({Key? key}) : super(key: key);
@@ -9,6 +8,7 @@ class MemberList extends StatefulWidget {
 }
 
 class _MemberListState extends State<MemberList> {
+  // ignore: non_constant_identifier_names
   List<Widget> list_member = [];
 
   @override
@@ -31,6 +31,33 @@ class _MemberListState extends State<MemberList> {
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed(member[i]['slug'].toString());
+            },
+            onLongPress: () {
+              // show menu in bottom screen
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text(
+                            member[i]['name'].toString(),
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "UwU",
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
             },
             child: Column(
               children: [

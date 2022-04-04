@@ -46,6 +46,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^2.1.2+1
+  flutter_launcher_icons: ^0.9.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,6 +55,15 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   change_app_package_name: ^1.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/android_icon.png"
+  image_path_android: "assets/icon/android_icon.png"
+  image_path_ios: "assets/icon/ios_icon.png"
+  adaptive_icon_background: "assets/icon/adaptive_background.png"
+  adaptive_icon_foreground: "assets/icon/adaptive_foreground.png"
 
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen

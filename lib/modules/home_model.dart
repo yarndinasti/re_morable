@@ -1,78 +1,79 @@
 class HomeModel {
   HomeModel({
     required this.slideshow,
-    required this.videoList,
+    required this.videos,
   });
   late final List<Slideshow> slideshow;
-  late final List<VideoList> videoList;
+  late final List<Videos> videos;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
     slideshow =
         List.from(json['slideshow']).map((e) => Slideshow.fromJson(e)).toList();
-    videoList = List.from(json['video_list'])
-        .map((e) => VideoList.fromJson(e))
-        .toList();
+    videos = List.from(json['videos']).map((e) => Videos.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['slideshow'] = slideshow.map((e) => e.toJson()).toList();
-    _data['video_list'] = videoList.map((e) => e.toJson()).toList();
+    _data['videos'] = videos.map((e) => e.toJson()).toList();
     return _data;
   }
 }
 
 class Slideshow {
   Slideshow({
-    required this.thumbnail,
     required this.title,
     required this.url,
+    required this.thumbnail,
   });
-  late final String thumbnail;
   late final String title;
   late final String url;
+  late final String thumbnail;
 
   Slideshow.fromJson(Map<String, dynamic> json) {
-    thumbnail = json['thumbnail'];
     title = json['title'];
     url = json['url'];
+    thumbnail = json['thumbnail'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['thumbnail'] = thumbnail;
     _data['title'] = title;
     _data['url'] = url;
+    _data['thumbnail'] = thumbnail;
     return _data;
   }
 }
 
-class VideoList {
-  VideoList({
+class Videos {
+  Videos({
     required this.id,
     required this.title,
     required this.published,
+    required this.from,
+    required this.duration,
+    required this.checked,
     required this.thumbnail,
-    required this.miniThumbnail,
     required this.live,
-    required this.member,
   });
   late final String id;
   late final String title;
   late final int published;
-  late final String thumbnail;
-  late final String miniThumbnail;
+  late final From from;
+  late final int duration;
+  late final int checked;
+  late final Thumbnail thumbnail;
   late final Live live;
-  late final Member member;
 
-  VideoList.fromJson(Map<String, dynamic> json) {
+  Videos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     published = json['published'];
-    thumbnail = json['thumbnail'];
-    miniThumbnail = json['mini_thumbnail'];
+    from = From.fromJson(json['from']);
+    duration = json['duration'];
+    checked = json['checked'];
+    thumbnail = Thumbnail.fromJson(json['thumbnail']);
     live = Live.fromJson(json['live']);
-    member = Member.fromJson(json['member']);
   }
 
   Map<String, dynamic> toJson() {
@@ -80,56 +81,74 @@ class VideoList {
     _data['id'] = id;
     _data['title'] = title;
     _data['published'] = published;
-    _data['thumbnail'] = thumbnail;
-    _data['mini_thumbnail'] = miniThumbnail;
+    _data['from'] = from.toJson();
+    _data['duration'] = duration;
+    _data['checked'] = checked;
+    _data['thumbnail'] = thumbnail.toJson();
     _data['live'] = live.toJson();
-    _data['member'] = member.toJson();
+    return _data;
+  }
+}
+
+class From {
+  From({
+    required this.name,
+    required this.slug,
+    required this.channelId,
+  });
+  late final String name;
+  late final String slug;
+  late final String channelId;
+
+  From.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    slug = json['slug'];
+    channelId = json['channel_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['slug'] = slug;
+    _data['channel_id'] = channelId;
+    return _data;
+  }
+}
+
+class Thumbnail {
+  Thumbnail({
+    required this.normal,
+    required this.mini,
+  });
+  late final String normal;
+  late final String mini;
+
+  Thumbnail.fromJson(Map<String, dynamic> json) {
+    normal = json['normal'];
+    mini = json['mini'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['normal'] = normal;
+    _data['mini'] = mini;
     return _data;
   }
 }
 
 class Live {
   Live({
-    required this.liveStatus,
-    required this.startTime,
+    required this.startStream,
   });
-  late final String liveStatus;
-  late final int startTime;
+  late final int startStream;
 
   Live.fromJson(Map<String, dynamic> json) {
-    liveStatus = json['live_status'];
-    startTime = json['start_time'];
+    startStream = json['start_stream'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['live_status'] = liveStatus;
-    _data['start_time'] = startTime;
-    return _data;
-  }
-}
-
-class Member {
-  Member({
-    required this.slug,
-    required this.name,
-    required this.gen,
-  });
-  late final String slug;
-  late final String name;
-  late final int gen;
-
-  Member.fromJson(Map<String, dynamic> json) {
-    slug = json['slug'];
-    name = json['name'];
-    gen = json['gen'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['slug'] = slug;
-    _data['name'] = name;
-    _data['gen'] = gen;
+    _data['start_stream'] = startStream;
     return _data;
   }
 }

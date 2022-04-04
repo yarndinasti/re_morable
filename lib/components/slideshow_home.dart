@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:re_morable/modules/anchor.dart';
 import 'package:re_morable/modules/home_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class SlideshowHome extends StatefulWidget {
@@ -34,7 +35,31 @@ class _SlideshowHomeState extends State<SlideshowHome> {
                 // add image + transparent black in foreground
                 image: DecorationImage(
                   // when networkimage error, use container
-                  image: NetworkImage(widget.tabSlideshow[i].thumbnail),
+                  image: Image.network(
+                    widget.tabSlideshow[i].thumbnail,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (ctx, child, progress) {
+                      return Shimmer.fromColors(
+                        highlightColor:
+                            const Color.fromARGB(255, 224, 224, 224),
+                        baseColor: const Color.fromARGB(255, 202, 202, 202),
+                        child: Container(
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
+                    errorBuilder: (context, err, stackTrace) {
+                      print(err);
+                      return Container(
+                        color: Colors.grey,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Whoops!',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      );
+                    },
+                  ).image,
 
                   fit: BoxFit.cover,
                 ),

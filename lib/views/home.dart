@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                     : SlideshowHome(tabSlideshow: SaveLocal.data!.slideshow)),
             // make header text
             Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
               alignment: Alignment.topLeft,
               child: const Text(
                 "Members",
@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
             const MemberList(),
             // make header text
             Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+              margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
               alignment: Alignment.topLeft,
               child: (SaveLocal.isError)
                   ? Container()
