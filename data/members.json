@@ -1,0 +1,81 @@
+{
+  "members": [
+    {
+      "name": "Evelyn Vtuber",
+      "slug": "evelyn",
+      "channelId": "UCMxxFFeuhFQ30quuePTym0A",
+      "twitter": "evelynvtuber",
+      "instagram": "evelyn.vtuber",
+      "facebook": "evelyn.vtuberr",
+      "donate": {
+        "trakteer": "evelynvtuber",
+        "karyakarsa": "evelynvtuber",
+        "steamlabs": "evelynvtuber"
+      },
+      "description": "Normal college student who aspire to become everyone's mood booster, so she become a Vtuber. Very normal Student. Totally normal. Not receh at all.",
+      "birthday": "1 Desember",
+      "creator": {
+        "ilustrator": "Nabs",
+        "riging": "Reinly"
+      }
+    },
+    {
+      "name": "Lily Ifeta",
+      "slug": "lily",
+      "channelId": "",
+      "twitter": "",
+      "instagram": "",
+      "facebook": null,
+      "donate": {
+        "trakteer": "",
+        "karyakarsa": null,
+        "steamlabs": ""
+      },
+      "description": "",
+      "birthday": "",
+      "creator": {
+        "ilustrator": "",
+
+        "riging": ""
+      }
+    },
+    {
+      "name": "Reynard Blanc",
+      "slug": "reynard",
+      "channelId": "",
+      "twitter": "",
+      "instagram": "",
+      "facebook": "",
+      "donate": {
+        "trakteer": "",
+        "karyakarsa": null,
+        "steamlabs": ""
+      },
+      "description": "",
+      "birthday": "",
+      "creator": {
+        "ilustrator": "",
+        "riging": ""
+      }
+    },
+    {
+      "name": "Chloe Pawapua",
+      "slug": "chloe",
+      "channelId": "",
+      "twitter": "",
+      "instagram": "",
+      "facebook": null,
+      "donate": {
+        "trakteer": "",
+        "karyakarsa": null,
+        "steamlabs": ""
+      },
+      "description": "",
+      "birthday": "",
+      "creator": {
+        "ilustrator": "",
+        "riging": ""
+      }
+    }
+  ]
+}
