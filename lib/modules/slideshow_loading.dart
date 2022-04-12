@@ -9,31 +9,17 @@ class SlideshowLoading extends StatefulWidget {
 }
 
 class _SlideshowLoadingState extends State<SlideshowLoading> {
-  List<Widget> dot = [];
-  @override
-  void initState() {
-    super.initState();
-    for (var i = 0; i < 5; i++) {
-      dot.add(Container(
-        width: 8,
-        height: 8,
-        decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
-      ));
-      dot.add(const SizedBox(width: 4));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return Shimmer.fromColors(
       highlightColor: const Color.fromARGB(255, 224, 224, 224),
       baseColor: const Color.fromARGB(255, 202, 202, 202),
       child: Column(
         children: [
           Container(
-            margin:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+            margin: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Color.fromARGB(255, 202, 202, 202),
@@ -41,16 +27,20 @@ class _SlideshowLoadingState extends State<SlideshowLoading> {
             child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: AspectRatio(
-                  aspectRatio: 16 / 9,
+                  aspectRatio: (orientation == Orientation.portrait)
+                      ? 16 / 8.75
+                      : 16 / 2.75,
                   child: Container(
                     color: Colors.grey,
                   ),
                 )),
           ),
           const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dot,
+          Container(
+            width: 8,
+            height: 8,
+            decoration:
+                const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
           ),
           const SizedBox(height: 5),
         ],

@@ -21,7 +21,10 @@ class _IndexState extends State<Index> {
   ];
 
   final title = [
-    Image.asset('assets/logo-dark.png'),
+    Image.asset(
+      'assets/logo_dark.png',
+      height: 24,
+    ),
     const Text('News'),
     const Text('More'),
   ];
@@ -71,20 +74,5 @@ class _IndexState extends State<Index> {
                 });
               }),
         ));
-  }
-}
-
-class MasterHome extends StatefulWidget {
-  const MasterHome({Key? key}) : super(key: key);
-
-  @override
-  State<MasterHome> createState() => _MasterHomeState();
-}
-
-class _MasterHomeState extends State<MasterHome> {
-  String uri = "";
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

@@ -1,23 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:re_morable/modules/save_local.dart';
+import 'package:re_morable/views/info_member.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'context_menu_member.dart';
-import 'package:re_morable/modules/members_model.dart';
+import 'package:re_morable/models/members_model.dart';
 
 class MemberList extends StatefulWidget {
   const MemberList({Key? key}) : super(key: key);
-
-  // get members from local json file
-  Future<List<Members>> getMembers() async {
-    final String jsonString = await rootBundle.loadString('data/members.json');
-    final Map<String, dynamic> jsonMap = json.decode(jsonString);
-    final List<dynamic> jsonList = jsonMap['members'];
-    final List<Members> members =
-        jsonList.map((dynamic json) => Members.fromJson(json)).toList();
-    return members;
-  }
 
   @override
   State<MemberList> createState() => _MemberListState();
@@ -25,16 +15,11 @@ class MemberList extends StatefulWidget {
 
 class _MemberListState extends State<MemberList> {
   // ignore: non_constant_identifier_names
-  List<Members> members = [];
+  // List<Members> members = [];
 
   @override
   void initState() {
     super.initState();
-    widget.getMembers().then((value) {
-      setState(() {
-        members = value;
-      });
-    });
   }
 
   @override
@@ -48,18 +33,23 @@ class _MemberListState extends State<MemberList> {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.only(left: 10, right: 10),
         shrinkWrap: true,
-        children: members
+        children: SaveLocal.membersData!
             .map(
-              (member) => Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(member.slug);
-                  },
-                  onLongPress: () {
-                    // show menu in bottom screen
-                    ContextMenuMember.showContext(member, context);
-                  },
+              (member) => GestureDetector(
+                onTap: () {
+                  // open info member
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoVtuber(member: member)),
+                  );
+                },
+                onLongPress: () {
+                  // show menu in bottom screen
+                  ContextMenuMember.showContext(member, context);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     children: [
                       // make image rounded

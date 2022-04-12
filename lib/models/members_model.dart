@@ -19,6 +19,7 @@ class MembersModel {
 class Members {
   Members({
     required this.name,
+    required this.role,
     required this.slug,
     required this.channelId,
     required this.twitter,
@@ -27,44 +28,72 @@ class Members {
     required this.donate,
     required this.description,
     required this.birthday,
-    required this.creator,
+    required this.designer,
+    required this.height,
   });
   late final String name;
+  late final Role role;
   late final String slug;
   late final String channelId;
   late final String twitter;
   late final String instagram;
   late final String? facebook;
   late final Donate donate;
-  late final String description;
+  late final Description description;
   late final String birthday;
-  late final Creator creator;
+  late final String designer;
+  late final String height;
 
   Members.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    role = Role.fromJson(json['role']);
     slug = json['slug'];
     channelId = json['channelId'];
     twitter = json['twitter'];
     instagram = json['instagram'];
     facebook = (json['facebook'] == null) ? null : json['facebook'];
     donate = Donate.fromJson(json['donate']);
-    description = json['description'];
+    description = Description.fromJson(json['description']);
     birthday = json['birthday'];
-    creator = Creator.fromJson(json['creator']);
+    designer = json['designer'];
+    height = json['height'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['name'] = name;
+    _data['role'] = role.toJson();
     _data['slug'] = slug;
     _data['channelId'] = channelId;
     _data['twitter'] = twitter;
     _data['instagram'] = instagram;
     _data['facebook'] = facebook;
     _data['donate'] = donate.toJson();
-    _data['description'] = description;
+    _data['description'] = description.toJson();
     _data['birthday'] = birthday;
-    _data['creator'] = creator.toJson();
+    _data['designer'] = designer;
+    _data['height'] = height;
+    return _data;
+  }
+}
+
+class Role {
+  Role({
+    required this.id,
+    required this.en,
+  });
+  late final String id;
+  late final String en;
+
+  Role.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    en = json['en'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['en'] = en;
     return _data;
   }
 }
@@ -94,23 +123,23 @@ class Donate {
   }
 }
 
-class Creator {
-  Creator({
-    required this.ilustrator,
-    required this.riging,
+class Description {
+  Description({
+    required this.en,
+    required this.id,
   });
-  late final String ilustrator;
-  late final String riging;
+  late final String en;
+  late final String id;
 
-  Creator.fromJson(Map<String, dynamic> json) {
-    ilustrator = json['ilustrator'];
-    riging = json['riging'];
+  Description.fromJson(Map<String, dynamic> json) {
+    en = json['en'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['ilustrator'] = ilustrator;
-    _data['riging'] = riging;
+    _data['en'] = en;
+    _data['id'] = id;
     return _data;
   }
 }

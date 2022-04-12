@@ -53,8 +53,9 @@ class Videos {
     required this.from,
     required this.duration,
     required this.checked,
+    required this.liveStatus,
     required this.thumbnail,
-    required this.live,
+    this.live,
   });
   late final String id;
   late final String title;
@@ -62,8 +63,9 @@ class Videos {
   late final From from;
   late final int duration;
   late final int checked;
+  late final String liveStatus;
   late final Thumbnail thumbnail;
-  late final Live live;
+  late final Live? live;
 
   Videos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,8 +74,9 @@ class Videos {
     from = From.fromJson(json['from']);
     duration = json['duration'];
     checked = json['checked'];
+    liveStatus = json['live_status'];
     thumbnail = Thumbnail.fromJson(json['thumbnail']);
-    live = Live.fromJson(json['live']);
+    live = json['live'] == null ? null : Live.fromJson(json['live']);
   }
 
   Map<String, dynamic> toJson() {
@@ -84,8 +87,9 @@ class Videos {
     _data['from'] = from.toJson();
     _data['duration'] = duration;
     _data['checked'] = checked;
+    _data['live_status'] = liveStatus;
     _data['thumbnail'] = thumbnail.toJson();
-    _data['live'] = live.toJson();
+    _data['live'] = live!.toJson();
     return _data;
   }
 }
@@ -139,16 +143,20 @@ class Thumbnail {
 class Live {
   Live({
     required this.startStream,
+    this.endStream,
   });
   late final int startStream;
+  late final int? endStream;
 
   Live.fromJson(Map<String, dynamic> json) {
     startStream = json['start_stream'];
+    endStream = (json['end_stream'] == null) ? null : json['end_stream'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['start_stream'] = startStream;
+    _data['end_stream'] = endStream;
     return _data;
   }
 }

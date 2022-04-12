@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:re_morable/modules/anchor.dart';
-import 'package:re_morable/modules/home_model.dart';
+import 'package:re_morable/models/home_model.dart';
 import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
@@ -23,48 +23,37 @@ class _SlideshowHomeState extends State<SlideshowHome> {
   void initState() {
     super.initState();
     //looping widget.tabSlideshow
-    for (var i = 0; i < widget.tabSlideshow.length; i++) {
+    for (var slideshowlist in widget.tabSlideshow) {
+      BoxDecoration? box;
+
+      try {
+        box = BoxDecoration(
+          // add image + transparent black in foreground
+          image: DecorationImage(
+            // when networkimage error, use container
+            image: Image.network(
+              slideshowlist.thumbnail,
+              fit: BoxFit.cover,
+            ).image,
+            fit: BoxFit.cover,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        );
+      } catch (e) {
+        print(e);
+        box = const BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        );
+      }
+
       // make slideshow clickable
       _slides.add(
         GestureDetector(
-            onTap: () => launchURL(widget.tabSlideshow[i].url),
+            onTap: () => launchURL(slideshowlist.url),
             child: Container(
-              margin: const EdgeInsets.only(
-                  left: 10, right: 10, bottom: 10, top: 10),
-              decoration: BoxDecoration(
-                // add image + transparent black in foreground
-                image: DecorationImage(
-                  // when networkimage error, use container
-                  image: Image.network(
-                    widget.tabSlideshow[i].thumbnail,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (ctx, child, progress) {
-                      return Shimmer.fromColors(
-                        highlightColor:
-                            const Color.fromARGB(255, 224, 224, 224),
-                        baseColor: const Color.fromARGB(255, 202, 202, 202),
-                        child: Container(
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, err, stackTrace) {
-                      print(err);
-                      return Container(
-                        color: Colors.grey,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Whoops!',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      );
-                    },
-                  ).image,
-
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
+              margin: const EdgeInsets.all(10),
+              decoration: box,
               // add text in bottom of image
               child: Container(
                 padding: const EdgeInsets.all(16),
@@ -74,7 +63,7 @@ class _SlideshowHomeState extends State<SlideshowHome> {
                 ),
                 child: Align(
                   child: Text(
-                    widget.tabSlideshow[i].title,
+                    slideshowlist.title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -91,13 +80,15 @@ class _SlideshowHomeState extends State<SlideshowHome> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     return Column(
       children: [
         CarouselSlider(
             items: _slides,
             carouselController: _controller,
             options: CarouselOptions(
-                aspectRatio: 16 / 9,
+                aspectRatio:
+                    (orientation == Orientation.portrait) ? 16 / 9 : 16 / 3,
                 autoPlay: true,
                 viewportFraction: 1,
                 onPageChanged: (index, reason) {

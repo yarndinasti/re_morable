@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'index.dart';
 
@@ -9,7 +12,8 @@ import 'firebase_options.dart';
 import 'modules/anchor.dart';
 
 // Routes
-import 'views/info_member.dart';
+import 'modules/save_local.dart';
+import 'models/members_model.dart';
 // End Routes
 
 Future<void> _handleBGFire(RemoteMessage message) async {
@@ -64,6 +68,12 @@ void main() async {
     );
   }
 
+  // fetch (data/members.json)
+  final members = await rootBundle.loadString('data/members.json');
+  final MembersModel memberList = MembersModel.fromJson(json.decode(members));
+
+  SaveLocal.membersData = memberList.members;
+
   runApp(const MyApp());
 }
 
@@ -83,6 +93,7 @@ class _MyAppState extends State<MyApp> {
 
   // ignore: non_constant_identifier_names
   void RegisterNotification() async {
+    // Notifications
     await reqMsgPermission();
 
     await FirebaseMessaging.instance.getInitialMessage().then((msg) {
@@ -118,7 +129,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    // Notifications
+// when local notification is clicked (localNotif)
     FirebaseMessaging.onMessageOpenedApp.listen((msg) {
       String? message = msg.notification!.title;
       print('Message opened: $message');
@@ -127,17 +138,12 @@ class _MyAppState extends State<MyApp> {
         launchURL(msg.data['url']);
       }
     });
-
-    // when local notification is clicked (localNotif)
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const Index(),
-      routes: {
-        'iofi': (_) => const InfoVtuber(slug: 'iofi'),
-      },
+    return const MaterialApp(
+      home: Index(),
     );
   }
 }

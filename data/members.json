@@ -2,6 +2,10 @@
   "members": [
     {
       "name": "Evelyn Vtuber",
+      "role": {
+        "id": "Siswa \"Recehan\"",
+        "en": "\"Receh\" Student"
+      },
       "slug": "evelyn",
       "channelId": "UCMxxFFeuhFQ30quuePTym0A",
       "twitter": "evelynvtuber",
@@ -12,35 +16,44 @@
         "karyakarsa": "evelynvtuber",
         "steamlabs": "evelynvtuber"
       },
-      "description": "Normal college student who aspire to become everyone's mood booster, so she become a Vtuber. Very normal Student. Totally normal. Not receh at all.",
+      "description": {
+        "en": "Normal college student who aspire to become everyone's mood booster, so she become a Vtuber. Very normal Student. Totally normal. Not receh at all.",
+        "id": "Siswa SMA yang ingin menjadi mood booster semua orang, sehingga menjadi Vtuber. Siswa normal. Sangat normal. Tidak ada recehan."
+      },
       "birthday": "1 Desember",
-      "creator": {
-        "ilustrator": "Nabs",
-        "riging": "Reinly"
-      }
+      "designer": "Mama Nabs / Papa Reinly",
+      "height": "160 + 5cm (Ahoge)"
     },
     {
       "name": "Lily Ifeta",
+      "role": {
+        "id": "Malaikat Biduan",
+        "en": "Angel of Dangdut"
+      },
       "slug": "lily",
-      "channelId": "",
-      "twitter": "",
-      "instagram": "",
+      "channelId": "UCXSbl3XQYtx1u4Gvvca7NUA",
+      "twitter": "LilyIfeta",
+      "instagram": "lily_ifeta",
       "facebook": null,
       "donate": {
-        "trakteer": "",
+        "trakteer": "lilyifeta",
         "karyakarsa": null,
-        "steamlabs": ""
+        "steamlabs": "lilyifeta"
       },
-      "description": "",
-      "birthday": "",
-      "creator": {
-        "ilustrator": "",
-
-        "riging": ""
-      }
+      "description": {
+        "en": "A problematic angel who thrown to earth. To make it back to heaven, she have to collect enough happiness from human.",
+        "id": "Malaikat biduan yang menjadi masalah. Untuk mencari kembali ke langit, ia perlu mengumpulkan kebahagiaan dari manusia."
+      },
+      "birthday": "9 September",
+      "designer": "Papa Reinly",
+      "height": "156 cm"
     },
     {
       "name": "Reynard Blanc",
+      "role": {
+        "en": "Fox Musici@n",
+        "id": "Musisi Rub@h"
+      },
       "slug": "reynard",
       "channelId": "",
       "twitter": "",
@@ -51,15 +64,20 @@
         "karyakarsa": null,
         "steamlabs": ""
       },
-      "description": "",
+      "description": {
+        "en": "",
+        "id": ""
+      },
       "birthday": "",
-      "creator": {
-        "ilustrator": "",
-        "riging": ""
-      }
+      "designer": "",
+      "height": ""
     },
     {
       "name": "Chloe Pawapua",
+      "role": {
+        "en": "\"Maybe\" Wizard",
+        "id": "\"Mungkin\" Penyihir"
+      },
       "slug": "chloe",
       "channelId": "",
       "twitter": "",
@@ -70,12 +88,13 @@
         "karyakarsa": null,
         "steamlabs": ""
       },
-      "description": "",
+      "description": {
+        "en": "",
+        "id": ""
+      },
       "birthday": "",
-      "creator": {
-        "ilustrator": "",
-        "riging": ""
-      }
+      "designer": "",
+      "height": ""
     }
   ]
 }
