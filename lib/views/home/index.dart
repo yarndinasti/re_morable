@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/home.dart';
+import 'home.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);

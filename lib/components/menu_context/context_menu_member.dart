@@ -3,7 +3,7 @@ import 'package:re_morable/models/members_model.dart';
 import 'package:re_morable/rem_icons/re-memories_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:re_morable/modules/anchor.dart';
+import 'package:re_morable/modules/utils/anchor.dart';
 
 class ContextMenuMember {
   // get members

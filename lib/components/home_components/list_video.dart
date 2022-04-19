@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:re_morable/modules/anchor.dart';
+import 'package:re_morable/modules/utils/anchor.dart';
 import 'package:re_morable/rem_icons/re-memories_icons.dart';
 import 'package:re_morable/models/home_model.dart';
 import 'package:shimmer/shimmer.dart';
-import 'context_video_home.dart';
+import '../menu_context/context_video_home.dart';
 
 class ListVideo extends StatefulWidget {
   final List<Videos> list;

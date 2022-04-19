@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:re_morable/firebase_options.dart';
+import 'package:re_morable/modules/utils/firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,7 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 // Local Notification
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:re_morable/modules/anchor.dart';
+import 'package:re_morable/modules/utils/anchor.dart';
 
 // Variable Notification
 AndroidNotificationChannel? notifChannel;

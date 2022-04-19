@@ -1,9 +1,9 @@
-import 'package:re_morable/modules/save_local.dart';
+import 'package:re_morable/modules/utils/save_local.dart';
 import 'package:re_morable/views/info_member.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'context_menu_member.dart';
+import '../menu_context/context_menu_member.dart';
 import 'package:re_morable/models/members_model.dart';
 
 class MemberList extends StatefulWidget {

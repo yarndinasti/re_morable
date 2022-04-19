@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:re_morable/components/slideshow_home.dart';
-import 'package:re_morable/components/member_list.dart';
-import 'package:re_morable/modules/list_video_loading.dart';
-import 'package:re_morable/components/list_video.dart';
-import 'package:re_morable/modules/slideshow_loading.dart';
+import 'package:re_morable/components/home_components/slideshow_home.dart';
+import 'package:re_morable/components/home_components/member_list.dart';
+import 'package:re_morable/modules/home_modules/list_video_loading.dart';
+import 'package:re_morable/components/home_components/list_video.dart';
+import 'package:re_morable/modules/home_modules/slideshow_loading.dart';
 import 'package:re_morable/models/home_model.dart';
-import 'package:re_morable/modules/fetch.dart';
-import 'package:re_morable/modules/save_local.dart';
+import 'package:re_morable/modules/utils/fetch.dart';
+import 'package:re_morable/modules/utils/save_local.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:re_morable/views/introduction.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'introduction.dart';
+import '../introduction.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:re_morable/modules/anchor.dart';
+import 'package:re_morable/modules/utils/anchor.dart';
 import 'package:re_morable/models/home_model.dart';
 import 'package:re_morable/models/members_model.dart';
-import 'package:re_morable/modules/save_local.dart';
+import 'package:re_morable/modules/utils/save_local.dart';
 import 'package:re_morable/rem_icons/re-memories_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:re_morable/views/info_member.dart';

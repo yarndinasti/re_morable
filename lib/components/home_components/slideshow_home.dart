@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:re_morable/modules/anchor.dart';
+import 'package:re_morable/modules/utils/anchor.dart';
 import 'package:re_morable/models/home_model.dart';
 import 'package:shimmer/shimmer.dart';
 

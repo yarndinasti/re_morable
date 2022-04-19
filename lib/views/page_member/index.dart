@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:re_morable/components/context_menu_member.dart';
+import 'package:re_morable/components/menu_context/context_menu_member.dart';
 import 'package:re_morable/models/members_model.dart';
 
 class MemberHome extends StatefulWidget {

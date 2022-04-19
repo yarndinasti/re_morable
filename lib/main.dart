@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'index.dart';
-import 'modules/notification.dart';
+import 'views/home/index.dart';
+import 'modules/utils/notification.dart';
 
 // Routes
-import 'modules/save_local.dart';
+import 'modules/utils/save_local.dart';
 import 'models/members_model.dart';
 // End Routes
 

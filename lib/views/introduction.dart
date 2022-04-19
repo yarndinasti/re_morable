@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:re_morable/modules/save_local.dart';
+import 'package:re_morable/modules/utils/save_local.dart';
 
-import '../index.dart';
+import 'home/index.dart';
 
 class Introduction extends StatefulWidget {
   const Introduction({Key? key}) : super(key: key);
