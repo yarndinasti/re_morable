@@ -7,4 +7,5 @@ class SaveLocal {
   static List<Videos>? videosData;
   static bool isError = false;
   static List<Members>? membersData;
+  static bool noInit = false;
 }

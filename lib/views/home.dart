@@ -8,6 +8,9 @@ import 'package:re_morable/models/home_model.dart';
 import 'package:re_morable/modules/fetch.dart';
 import 'package:re_morable/modules/save_local.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:re_morable/views/introduction.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'introduction.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,10 +24,24 @@ class _HomeState extends State<Home> {
 
   @override
   initState() {
+    initFirst();
     super.initState();
 
     if (SaveLocal.slideshowData == null || SaveLocal.videosData == null) {
       getDataHome();
+    }
+  }
+
+  Future<void> initFirst() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool notInit = (pref.getBool('notInit')) ?? false;
+
+    if (!notInit && !SaveLocal.noInit) {
+      // show introduction
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Introduction()),
+      );
     }
   }
 
