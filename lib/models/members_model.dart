@@ -19,11 +19,12 @@ class MembersModel {
 class Members {
   Members({
     required this.name,
-    required this.role,
+    required this.gen,
     required this.slug,
     required this.channelId,
     required this.twitter,
     required this.instagram,
+    this.bstation,
     this.facebook,
     required this.donate,
     required this.description,
@@ -32,11 +33,12 @@ class Members {
     required this.height,
   });
   late final String name;
-  late final Role role;
+  late final int gen;
   late final String slug;
   late final String channelId;
   late final String twitter;
   late final String instagram;
+  late final Bstation? bstation;
   late final String? facebook;
   late final Donate donate;
   late final Description description;
@@ -46,11 +48,13 @@ class Members {
 
   Members.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    role = Role.fromJson(json['role']);
+    gen = json['gen'];
     slug = json['slug'];
     channelId = json['channelId'];
     twitter = json['twitter'];
     instagram = json['instagram'];
+    bstation =
+        json['bstation'] != null ? Bstation.fromJson(json['bstation']) : null;
     facebook = (json['facebook'] == null) ? null : json['facebook'];
     donate = Donate.fromJson(json['donate']);
     description = Description.fromJson(json['description']);
@@ -62,11 +66,12 @@ class Members {
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['name'] = name;
-    _data['role'] = role.toJson();
+    _data['gen'] = gen;
     _data['slug'] = slug;
     _data['channelId'] = channelId;
     _data['twitter'] = twitter;
     _data['instagram'] = instagram;
+    _data['bstation'] = bstation?.toJson();
     _data['facebook'] = facebook;
     _data['donate'] = donate.toJson();
     _data['description'] = description.toJson();
@@ -77,23 +82,23 @@ class Members {
   }
 }
 
-class Role {
-  Role({
-    required this.id,
-    required this.en,
+class Bstation {
+  Bstation({
+    required this.liveid,
+    required this.spaceid,
   });
-  late final String id;
-  late final String en;
+  late final String liveid;
+  late final String spaceid;
 
-  Role.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    en = json['en'];
+  Bstation.fromJson(Map<String, dynamic> json) {
+    liveid = json['liveid'];
+    spaceid = json['spaceid'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['en'] = en;
+    _data['liveid'] = liveid;
+    _data['spaceid'] = spaceid;
     return _data;
   }
 }

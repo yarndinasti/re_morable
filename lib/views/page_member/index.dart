@@ -29,7 +29,8 @@ class _MemberHomeState extends State<MemberHome> {
           ),
           const SizedBox(height: 10),
           Text(
-            widget.member.role.id,
+            // detection st,nd,rd,th
+            "${getGenNum(widget.member.gen)} Generation",
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w300,
@@ -127,5 +128,23 @@ class _MemberHomeState extends State<MemberHome> {
         ],
       ),
     );
+  }
+
+  getGenNum(int gen) {
+    // split number then sort reverse
+    final numbers = gen.toString().split("").reversed.toList();
+    // get last number (in first list)
+    final lastEntry = numbers.first;
+    // detect number
+    switch (lastEntry) {
+      case "1":
+        return "${gen}st";
+      case "2":
+        return "${gen}nd";
+      case "3":
+        return "${gen}rd";
+      default:
+        return "${gen}th";
+    }
   }
 }

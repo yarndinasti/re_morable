@@ -3,7 +3,7 @@ import 'package:re_morable/views/info_member.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../menu_context/context_menu_member.dart';
+import 'package:re_morable/components/menu_context/context_menu_member.dart';
 import 'package:re_morable/models/members_model.dart';
 
 class MemberList extends StatefulWidget {

@@ -2,14 +2,12 @@
   "members": [
     {
       "name": "Evelyn Vtuber",
-      "role": {
-        "id": "Siswa \"Recehan\"",
-        "en": "\"Receh\" Student"
-      },
+      "gen": 1,
       "slug": "evelyn",
       "channelId": "UCMxxFFeuhFQ30quuePTym0A",
       "twitter": "evelynvtuber",
       "instagram": "evelyn.vtuber",
+      "bstation": null,
       "facebook": "evelyn.vtuberr",
       "donate": {
         "trakteer": "evelynvtuber",
@@ -26,14 +24,15 @@
     },
     {
       "name": "Lily Ifeta",
-      "role": {
-        "id": "Malaikat Biduan",
-        "en": "Angel of Dangdut"
-      },
+      "gen": 2,
       "slug": "lily",
       "channelId": "UCXSbl3XQYtx1u4Gvvca7NUA",
       "twitter": "LilyIfeta",
       "instagram": "lily_ifeta",
+      "bstation": {
+        "liveid": "",
+        "spaceid": ""
+      },
       "facebook": null,
       "donate": {
         "trakteer": "lilyifeta",
@@ -50,14 +49,15 @@
     },
     {
       "name": "Reynard Blanc",
-      "role": {
-        "en": "Fox Musici@n",
-        "id": "Musisi Rub@h"
-      },
+      "gen": 2,
       "slug": "reynard",
       "channelId": "",
       "twitter": "",
       "instagram": "",
+      "bstation": {
+        "liveid": "",
+        "spaceid": ""
+      },
       "facebook": "",
       "donate": {
         "trakteer": "",
@@ -74,14 +74,12 @@
     },
     {
       "name": "Chloe Pawapua",
-      "role": {
-        "en": "\"Maybe\" Wizard",
-        "id": "\"Mungkin\" Penyihir"
-      },
+      "gen": 2,
       "slug": "chloe",
       "channelId": "",
       "twitter": "",
       "instagram": "",
+      "bstation": null,
       "facebook": null,
       "donate": {
         "trakteer": "",

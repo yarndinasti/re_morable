@@ -10,7 +10,6 @@ import 'package:re_morable/modules/utils/save_local.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:re_morable/views/introduction.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../introduction.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
